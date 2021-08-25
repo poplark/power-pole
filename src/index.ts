@@ -1,3 +1,6 @@
+export * from './global';
+export * from './logger';
+
 /**
  * 版本号
  */
