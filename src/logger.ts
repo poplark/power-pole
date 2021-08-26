@@ -1,4 +1,10 @@
 /* eslint-disable prefer-spread */
+import global from './global';
+
+/**
+ * @internal
+ */
+const console = global.console;
 /**
  * @internal
  */
@@ -72,10 +78,13 @@ export class Logger {
    */
   debug(...args: any[]): void {
     if (this.level <= _ENUM_LOG_LEVEL.debug) {
-      console.info.apply(console, [`${new Date()} [DEBUG]: `].concat(args));
-      setTimeout(() => {
-        this.onDebug && this.onDebug(args);
-      }, 0);
+      const msgs = [`${new Date()} [DEBUG]: `].concat(args);
+      console.info.apply(console, msgs);
+      if (this.onDebug) {
+        setTimeout(() => {
+          this.onDebug && this.onDebug(args);
+        }, 0);
+      }
     }
   }
 
@@ -88,10 +97,13 @@ export class Logger {
    */
   info(...args: any[]): void {
     if (this.level <= _ENUM_LOG_LEVEL.info) {
-      console.info.apply(console, [`${new Date()} [INFO]: `].concat(args));
-      setTimeout(() => {
-        this.onInfo && this.onInfo(args);
-      }, 0);
+      const msgs = [`${new Date()} [INFO]: `].concat(args);
+      console.info.apply(console, msgs);
+      if (this.onInfo) {
+        setTimeout(() => {
+          this.onInfo && this.onInfo(args);
+        }, 0);
+      }
     }
   }
 
@@ -104,10 +116,13 @@ export class Logger {
    */
   warn(...args: any[]): void {
     if (this.level <= _ENUM_LOG_LEVEL.warn) {
-      console.warn.apply(console, [`${new Date()} [WARN]: `].concat(args));
-      setTimeout(() => {
-        this.onWarn && this.onWarn(args);
-      }, 0);
+      const msgs = [`${new Date()} [WARN]: `].concat(args);
+      console.warn.apply(console, msgs);
+      if (this.onWarn) {
+        setTimeout(() => {
+          this.onWarn && this.onWarn(args);
+        }, 0);
+      }
     }
   }
 
@@ -120,10 +135,13 @@ export class Logger {
    */
   error(...args: any[]): void {
     if (this.level <= _ENUM_LOG_LEVEL.error) {
-      console.error.apply(console, [`${new Date()} [ERROR]: `].concat(args));
-      setTimeout(() => {
-        this.onError && this.onError(args);
-      }, 0);
+      const msgs = [`${new Date()} [ERROR]: `].concat(args);
+      console.error.apply(console, msgs);
+      if (this.onError) {
+        setTimeout(() => {
+          this.onError && this.onError(args);
+        }, 0);
+      }
     }
   }
 

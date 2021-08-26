@@ -11,4 +11,15 @@ export function global(): typeof globalThis {
   }
 }
 
+/**
+ * 判断是否处理 worker 环境
+ */
+export function isWorker(): boolean {
+  return (
+    typeof WorkerGlobalScope !== 'undefined' &&
+    self instanceof WorkerGlobalScope &&
+    typeof importScripts !== 'undefined'
+  );
+}
+
 export default global();
